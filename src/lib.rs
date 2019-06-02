@@ -64,6 +64,18 @@ impl Version {
             minor,
         }
     }
+
+    /// Returns `true` if the API is OpenGL, `false` otherwise.
+    pub fn is_opengl(&self) -> bool {self.api == OPENGL}
+
+    /// Returns `true` if the API is Vulkan, `false` otherwise.
+    pub fn is_vulkan(&self) -> bool {self.api == VULKAN}
+
+    /// Returns `true` if the API is DirectX, `false` otherwise.
+    pub fn is_directx(&self) -> bool {self.api == DIRECTX}
+
+    /// Returns `true` if the API is metal, `false` otherwise.
+    pub fn is_metal(&self) -> bool {self.api == METAL}
 }
 
 #[cfg(test)]
