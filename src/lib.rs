@@ -16,6 +16,7 @@ pub const DIRECTX: &'static str = "DirectX";
 pub const METAL: &'static str = "Metal";
 
 use std::borrow::Cow;
+use std::error::Error;
 
 /// Stores graphics API version.
 #[derive(Clone, Debug, PartialEq, PartialOrd, Eq, Ord)]
@@ -77,6 +78,27 @@ impl Version {
     /// Returns `true` if the API is metal, `false` otherwise.
     pub fn is_metal(&self) -> bool {self.api == METAL}
 }
+
+/// An error for when a graphics API is unsupported.
+#[derive(Debug)]
+pub struct UnsupportedGraphicsApiError {
+    /// The requiested graphics API.
+    pub found: Cow<'static, str>,
+    /// A list of supported graphics APIs.
+    pub expected: Vec<Cow<'static, str>>,
+}
+
+impl std::fmt::Display for UnsupportedGraphicsApiError {
+    fn fmt(&self, w: &mut std::fmt::Formatter) -> Result<(), std::fmt::Error> {
+        let mut list = String::new();
+        for ex in &self.expected {
+            list.push_str(&format!("{}, ", ex));
+        }
+        write!(w, "Unsupported graphics API: Expected {}found {}", list, self.found)
+    }
+}
+
+impl Error for UnsupportedGraphicsApiError {}
 
 #[cfg(test)]
 mod tests {
