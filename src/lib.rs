@@ -4,16 +4,16 @@
 
 /// A graphics API developed by Khronos Group.
 /// See https://en.wikipedia.org/wiki/OpenGL for more information.
-pub const OPENGL: &'static str = "OpenGL";
+pub const OPENGL: &str = "OpenGL";
 /// A graphics API developed by Khronos Group.
 /// See https://en.wikipedia.org/wiki/Vulkan_(API) for more information.
-pub const VULKAN: &'static str = "Vulkan";
+pub const VULKAN: &str = "Vulkan";
 /// A graphics API developed by Microsoft.
 /// See https://en.wikipedia.org/wiki/DirectX for more information.
-pub const DIRECTX: &'static str = "DirectX";
+pub const DIRECTX: &str = "DirectX";
 /// A graphics API developed by Apple.
 /// See https://en.wikipedia.org/wiki/Metal_%28API%29 for more information.
-pub const METAL: &'static str = "Metal";
+pub const METAL: &str = "Metal";
 
 use std::borrow::Cow;
 use std::error::Error;
@@ -31,6 +31,7 @@ pub struct Version {
 
 impl Version {
     /// Creates a new OpenGL version.
+    #[must_use]
     pub fn opengl(major: u32, minor: u32) -> Version {
         Version {
             api: OPENGL.into(),
@@ -40,6 +41,7 @@ impl Version {
     }
 
     /// Creates a new Vulkan version.
+    #[must_use]
     pub fn vulkan(major: u32, minor: u32) -> Version {
         Version {
             api: VULKAN.into(),
@@ -49,6 +51,7 @@ impl Version {
     }
 
     /// Creates a new DirectX version.
+    #[must_use]
     pub fn directx(major: u32, minor: u32) -> Version {
         Version {
             api: DIRECTX.into(),
@@ -58,6 +61,7 @@ impl Version {
     }
 
     /// Creates a new Metal version.
+    #[must_use]
     pub fn metal(major: u32, minor: u32) -> Version {
         Version {
             api: METAL.into(),
@@ -67,22 +71,26 @@ impl Version {
     }
 
     /// Returns `true` if the API is OpenGL, `false` otherwise.
+    #[must_use]
     pub fn is_opengl(&self) -> bool {self.api == OPENGL}
 
     /// Returns `true` if the API is Vulkan, `false` otherwise.
+    #[must_use]
     pub fn is_vulkan(&self) -> bool {self.api == VULKAN}
 
     /// Returns `true` if the API is DirectX, `false` otherwise.
+    #[must_use]
     pub fn is_directx(&self) -> bool {self.api == DIRECTX}
 
     /// Returns `true` if the API is metal, `false` otherwise.
+    #[must_use]
     pub fn is_metal(&self) -> bool {self.api == METAL}
 }
 
 /// An error for when a graphics API is unsupported.
 #[derive(Debug)]
 pub struct UnsupportedGraphicsApiError {
-    /// The requiested graphics API.
+    /// The requested graphics API.
     pub found: Cow<'static, str>,
     /// A list of supported graphics APIs.
     pub expected: Vec<Cow<'static, str>>,
