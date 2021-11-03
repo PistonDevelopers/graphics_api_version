@@ -1,6 +1,6 @@
 [package]
 name = "piston-graphics_api_version"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Sven Nilsen <bvssvni@gmail.com>"]
 keywords = ["piston", "graphics", "api", "version"]
 description = "A library for storing graphics API versions"
